@@ -84,10 +84,6 @@ class _BottomNavbarWidgetState extends State<BottomNavbarWidget> {
               i['icon'],
               color: Colors.grey,
             ),
-            // activeIcon: SvgPicture.asset(
-            //   i['icon'],
-            //   color: primaryColor,
-            // ),
             label: i['label'],
           );
         }).toList(),

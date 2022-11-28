@@ -10,6 +10,13 @@ class FormWidget extends StatefulWidget {
 class _FormWidgetState extends State<FormWidget> {
   bool isOn = false;
 
+  var selected = 'Flutter';
+  final dropdownList = <String>['Flutter', 'Dart', 'Java', 'Scala', 'Python'];
+
+  var sex = 'male';
+  var isChecked = false;
+  TextEditingController textController = TextEditingController(text: 'Sabrina');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +27,11 @@ class _FormWidgetState extends State<FormWidget> {
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                initialValue: 'John Doe',
+              TextField(
                 maxLength: 20,
+                controller: textController,
                 decoration: const InputDecoration(
                   labelText: 'Name',
                   labelStyle: TextStyle(
@@ -37,6 +45,40 @@ class _FormWidgetState extends State<FormWidget> {
                   helperText: "What's your name?",
                 ),
                 onChanged: (value) {},
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text('Your Favorite Language:'),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  DropdownButton(
+                    value: selected,
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 20,
+                    style: TextStyle(color: Colors.blue[600]),
+                    underline: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Colors.grey,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                    ),
+                    items: dropdownList
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (String? val) {
+                      setState(() {
+                        if (val != null) selected = val;
+                      });
+                    },
+                  ),
+                ],
               ),
               LayoutBuilder(builder: (context, constraint) {
                 List<String> itemStringList = ["Female", "Male"];
@@ -125,97 +167,74 @@ class _FormWidgetState extends State<FormWidget> {
                   ),
                 ],
               ),
-              LayoutBuilder(
-                builder: (context, constraint) {
-                  String groupValue = "gender";
-                  List items = [
-                    {
-                      "label": "Female",
-                      "value": "female",
-                      "checked": true,
-                    },
-                    {
-                      "label": "Male",
-                      "value": "Male",
-                    }
-                  ];
-                  return FormField(
-                    initialValue: false,
-                    enabled: true,
-                    builder: (FormFieldState<bool> field) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: 'Gender',
-                          errorText: field.errorText,
-                          border: InputBorder.none,
-                        ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            var item = items[index];
-
-                            return RadioListTile<dynamic>(
-                              title: Text("${item["label"]}"),
-                              groupValue: true,
-                              value: item["checked"] ?? false,
-                              onChanged: (val) {
-                                field.didChange(true);
-                              },
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  );
-                },
+              Row(
+                children: [
+                  const Text('Gender :'),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Radio(
+                        value: 'male',
+                        groupValue: sex,
+                        onChanged: (String? val) {
+                          setState(() {
+                            if (val != null) {
+                              sex = val;
+                            }
+                          });
+                        },
+                      ),
+                      const Text('Male'),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Radio(
+                        value: 'female',
+                        groupValue: sex,
+                        onChanged: (String? val) {
+                          setState(() {
+                            if (val != null) {
+                              sex = val;
+                            }
+                          });
+                        },
+                      ),
+                      const Text('Female'),
+                    ],
+                  ),
+                ],
               ),
-              LayoutBuilder(
-                builder: (context, constraint) {
-                  List items = [
-                    {
-                      "label": "Flutter",
-                      "value": "Flutter",
+              Row(
+                children: [
+                  Checkbox(
+                    value: isChecked,
+                    activeColor: Colors.blue,
+                    onChanged: (val) {
+                      setState(() {
+                        if (val != null) {
+                          isChecked = val;
+                        }
+                      });
                     },
-                    {
-                      "label": "Java",
-                      "value": "Java",
-                      "checked": true,
-                    },
-                    {
-                      "label": "C#",
-                      "value": "C#",
-                    }
-                  ];
-                  return FormField(
-                    initialValue: false,
-                    enabled: true,
-                    builder: (FormFieldState<bool> field) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: 'Gender',
-                          errorText: field.errorText,
-                          border: InputBorder.none,
-                        ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            var item = items[index];
-
-                            return CheckboxListTile(
-                              title: Text("${item["label"]}"),
-                              value: item["checked"] ?? false,
-                              onChanged: (value) {
-                                field.didChange(true);
-                              },
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  );
-                },
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  const Text(
+                    'Agree Term & Conditions',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
               ),
               InkWell(
                 onTap: () async {
@@ -225,7 +244,7 @@ class _FormWidgetState extends State<FormWidget> {
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2100),
                   );
-                  print("pickedDate: $pickedDate");
+                  debugPrint("pickedDate: $pickedDate");
                 },
                 child: TextFormField(
                   initialValue: '2022-08-01',
@@ -242,7 +261,7 @@ class _FormWidgetState extends State<FormWidget> {
                       ),
                     ),
                     suffixIcon: Icon(Icons.date_range),
-                    helperText: "What's your name?",
+                    helperText: "What's your birth date?",
                   ),
                   onChanged: (value) {},
                 ),

@@ -35,7 +35,7 @@ class _SliverWidgetState extends State<SliverWidget> {
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return Container(
-                color: index.isOdd ? Colors.white : Colors.amber,
+                color: index.isOdd ? Colors.white : Colors.blue[200],
                 height: 100,
                 child: Center(
                   child: Text(

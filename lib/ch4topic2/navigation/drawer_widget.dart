@@ -17,7 +17,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       ),
       endDrawer: Drawer(
         child: Container(
-          color: Colors.amber[50],
+          color: Colors.white,
           child: ListView(
             padding: const EdgeInsets.all(0),
             children: [
@@ -25,18 +25,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 color: Colors.blue[100],
                 child: UserAccountsDrawerHeader(
                   currentAccountPicture: const CircleAvatar(
-                    // radius: 80,
                     child: FlutterLogo(size: 50),
                   ),
-                  decoration: BoxDecoration(color: Colors.deepOrange[200]),
-                  accountName: const Text('Zaki Rozak'),
-                  accountEmail: const Text('rozak.zaki@gmail.com'),
+                  decoration: BoxDecoration(color: Colors.grey[200]),
+                  accountName: const Text(
+                    'Sabrina',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  accountEmail: const Text(
+                    'sabrina.dev@gmail.com',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-                // DrawerHeader(
-                //   decoration: BoxDecoration(color: Colors.pink[100]),
-                //   child: Container(
-                //       color: Colors.green[100], child: Text('Settings')),
-                // ),
               ),
               ListTile(
                 title: const Text('Menu 1'),
@@ -46,10 +50,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
               ListTile(
                 title: const Text('Menu 2'),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Menu 3'),
                 onTap: () {},
               ),
             ],

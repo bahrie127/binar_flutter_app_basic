@@ -28,15 +28,15 @@ class _DialogWigetState extends State<DialogWiget> {
                       title: const Text('Info'),
                       content: SingleChildScrollView(
                         child: ListBody(
-                          children: const <Widget>[
+                          children: const [
                             Text('Your order was placed!'),
                           ],
                         ),
                       ),
-                      actions: <Widget>[
+                      actions: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueGrey,
+                            backgroundColor: Colors.blue,
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -58,32 +58,29 @@ class _DialogWigetState extends State<DialogWiget> {
                 await showModalBottomSheet<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return Container(
+                    return Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Wrap(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                const Text('Your order was placed!'),
-                                const SizedBox(
-                                  height: 20.0,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("Ok"),
-                                ),
-                              ],
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text('Your order was placed!'),
+                            const SizedBox(
+                              height: 20.0,
                             ),
-                          ),
-                        ],
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text("Ok"),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -174,7 +171,6 @@ class _DialogWigetState extends State<DialogWiget> {
               },
               child: const Text('Open snackbar'),
             ),
-            
           ],
         ),
       ),
